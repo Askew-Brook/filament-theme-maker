@@ -4,6 +4,24 @@ An Agent Skill for designing, auditing, and hardening complete Filament v5 panel
 
 This repository is compatible with the open Agent Skills format and can be installed with the `skills` CLI used by [skills.sh](https://skills.sh). The skill pushes an agent to inspect installed Filament vendor files, source CSS, Blade views, semantic `fi-*` class hooks, and package surfaces before writing theme overrides.
 
+## Install With Skills CLI
+
+```bash
+npx skills add Askew-Brook/filament-theme-maker --skill filament-theme-maker
+```
+
+To install locally before publishing:
+
+```bash
+npx skills add . --skill filament-theme-maker
+```
+
+For Codex specifically:
+
+```bash
+npx skills add . --skill filament-theme-maker --agent codex
+```
+
 ## What It Covers
 
 - Filament v5 theme audit workflow.
@@ -18,26 +36,6 @@ This repository is compatible with the open Agent Skills format and can be insta
 - Published vendor source from Filament.
 - A finished theme.
 - Any affiliation with Filament, Laravel, or their maintainers.
-
-## Install With Skills CLI
-
-After this repository is published, install it with:
-
-```bash
-npx skills add owner/filament-theme-maker --skill filament-theme-maker
-```
-
-To install locally before publishing:
-
-```bash
-npx skills add . --skill filament-theme-maker
-```
-
-For Codex specifically:
-
-```bash
-npx skills add . --skill filament-theme-maker --agent codex
-```
 
 ## Manual Install
 
@@ -99,13 +97,13 @@ git push origin main --tags
 Users can install latest from the default branch:
 
 ```bash
-npx skills add owner/filament-theme-maker --skill filament-theme-maker
+npx skills add Askew-Brook/filament-theme-maker --skill filament-theme-maker
 ```
 
 Or pin to a release tag:
 
 ```bash
-npx skills add owner/filament-theme-maker#v1.0.0 --skill filament-theme-maker
+npx skills add Askew-Brook/filament-theme-maker#v1.0.0 --skill filament-theme-maker
 ```
 
 ## License

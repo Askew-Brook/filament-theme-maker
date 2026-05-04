@@ -1,0 +1,4 @@
+interface:
+  display_name: "Filament Theme Maker"
+  short_description: "Audit and build complete Filament themes"
+  default_prompt: "Use $filament-theme-maker to audit a Filament panel theme and implement missing component coverage."

@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+
+.codex/
+.agents/tmp/
+
+node_modules/
+vendor/

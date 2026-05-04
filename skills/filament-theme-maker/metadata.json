@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "organization": "Askew Brook",
+  "date": "May 2026",
+  "abstract": "Complete Filament v5 theme-making guidance for AI agents. Covers vendor CSS inspection, semantic fi-* class hooks, Tailwind theme tokens, panel chrome, support Blade components, forms, schemas, tables, infolists, widgets, actions, notifications, and practical override strategy for building a full panel theme top to bottom.",
+  "references": [
+    "https://filamentphp.com/docs/llms.txt",
+    "https://filamentphp.com/docs/5.x/styling/colors",
+    "https://filamentphp.com/docs/5.x/styling/css-hooks",
+    "https://filamentphp.com/docs/5.x/components/overview",
+    "https://agentskills.io/specification",
+    "https://github.com/vercel-labs/skills"
+  ]
+}

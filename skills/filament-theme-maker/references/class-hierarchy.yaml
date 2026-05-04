@@ -1,0 +1,349 @@
+# Filament v5 class hierarchy for selector planning.
+# Use this to avoid writing selectors against the wrong parent or sibling.
+
+document:
+  html.fi:
+    body.fi-body:
+      state_classes:
+        - fi-panel-{id}
+        - fi-body-has-navigation
+        - fi-body-has-topbar
+        - fi-body-has-top-navigation
+        - fi-body-has-sidebar-collapsible-on-desktop
+        - fi-body-has-sidebar-fully-collapsible-on-desktop
+
+panel_layout:
+  .fi-topbar-ctn:
+    nav.fi-topbar:
+      .fi-topbar-start:
+        - sidebar toggle buttons
+        - logo
+      ul.fi-topbar-nav-groups:
+        li.fi-topbar-item:
+          states:
+            - fi-active
+          button.fi-topbar-item-btn:
+            - .fi-topbar-item-icon
+            - .fi-topbar-item-label
+            - .fi-topbar-group-toggle-icon
+      .fi-topbar-end:
+        - global search
+        - database notifications
+        - theme switcher
+        - user menu
+
+  aside.fi-sidebar:
+    states:
+      - fi-sidebar-open
+    .fi-sidebar-header-ctn:
+      .fi-sidebar-header:
+        - .fi-sidebar-header-logo-ctn
+        - collapse controls
+    nav.fi-sidebar-nav:
+      ul.fi-sidebar-nav-groups:
+        li.fi-sidebar-group:
+          states:
+            - fi-active
+            - fi-collapsible
+            - fi-collapsed
+          .fi-sidebar-group-btn:
+            - .fi-sidebar-group-label
+            - .fi-sidebar-group-collapse-btn
+          .fi-sidebar-group-dropdown-trigger-btn:
+            - collapsed-sidebar group trigger
+          ul.fi-sidebar-group-items:
+            li.fi-sidebar-item:
+              states:
+                - fi-active
+                - fi-sidebar-item-has-url
+                - fi-sidebar-item-has-active-child-items
+              a_or_button.fi-sidebar-item-btn:
+                - .fi-sidebar-item-icon
+                - .fi-sidebar-item-label
+                - .fi-sidebar-item-badge-ctn
+              .fi-sidebar-item-grouped-border:
+                - .fi-sidebar-item-grouped-border-part
+                - .fi-sidebar-item-grouped-border-part-not-first
+                - .fi-sidebar-item-grouped-border-part-not-last
+              ul.fi-sidebar-sub-group-items:
+                - recursive sidebar item children
+    .fi-sidebar-footer:
+      - user menu or database notifications
+
+  .fi-layout:
+    .fi-main-ctn:
+      main.fi-main:
+        width_classes:
+          - fi-width-{token}
+        .fi-page:
+          states:
+            - fi-height-full
+            - fi-page-has-sub-navigation
+            - fi-page-has-sub-navigation-start
+            - fi-page-has-sub-navigation-end
+          .fi-page-header-main-ctn:
+            header.fi-header:
+              states:
+                - fi-header-has-breadcrumbs
+              children:
+                - .fi-breadcrumbs
+                - .fi-header-heading
+                - .fi-header-subheading
+                - .fi-header-actions-ctn
+            .fi-page-main:
+              - .fi-page-sub-navigation-sidebar
+              - .fi-page-sub-navigation-tabs
+              - .fi-page-sub-navigation-dropdown
+              - .fi-page-content
+
+simple_layout:
+  .fi-simple-layout:
+    - .fi-simple-layout-header
+    .fi-simple-main-ctn:
+      main.fi-simple-main:
+        width_classes:
+          - fi-width-{token}
+        .fi-simple-page:
+          .fi-simple-page-content:
+            header.fi-simple-header:
+              - .fi-logo
+              - .fi-simple-header-heading
+              - .fi-simple-header-subheading
+            form.fi-sc-form:
+              - schema/form fields
+
+actions:
+  .fi-ac:
+    states:
+      - fi-width-full
+      - fi-align-start
+      - fi-align-center
+      - fi-align-end
+      - fi-align-between
+      - fi-align-justify
+    children:
+      - .fi-btn
+      - .fi-icon-btn
+      - .fi-link
+      - .fi-dropdown
+
+button:
+  .fi-btn-group:
+    children:
+      - .fi-btn
+  .fi-btn:
+    states:
+      - fi-color
+      - fi-outlined
+      - fi-disabled
+      - fi-processing
+      - fi-size-{xs|sm|md|lg|xl}
+      - fi-labeled-from-{sm|md|lg|xl|2xl}
+    children:
+      - .fi-icon
+      - .fi-loading-indicator
+      - .fi-btn-badge-ctn
+  .fi-icon-btn:
+    states:
+      - fi-color
+      - fi-disabled
+      - fi-size-{xs|sm|md|lg|xl}
+    children:
+      - .fi-icon
+      - .fi-icon-btn-badge-ctn
+
+fields:
+  .fi-fo-field:
+    states:
+      - fi-fo-field-has-inline-label
+      - fi-vertical-align-start
+      - fi-vertical-align-center
+      - fi-vertical-align-end
+    .fi-fo-field-label-col:
+      .fi-fo-field-label-ctn:
+        label.fi-fo-field-label:
+          - .fi-checkbox-input
+          - .fi-fo-field-label-content
+          - .fi-fo-field-label-required-mark
+    .fi-fo-field-content-col:
+      .fi-fo-field-content-ctn:
+        .fi-fo-field-content:
+          - input component slot
+      - .fi-fo-field-wrp-error-message
+      - .fi-fo-field-wrp-error-list
+
+input_wrapper:
+  .fi-input-wrp:
+    states:
+      - fi-disabled
+      - fi-invalid
+    .fi-input-wrp-prefix:
+      states:
+        - fi-inline
+        - fi-input-wrp-prefix-has-content
+        - fi-input-wrp-prefix-has-label
+      children:
+        - .fi-input-wrp-actions
+        - .fi-icon
+        - .fi-input-wrp-label
+    .fi-input-wrp-content-ctn:
+      states:
+        - fi-input-wrp-content-ctn-ps
+      children:
+        - input.fi-input
+        - select.fi-select-input
+    .fi-input-wrp-suffix:
+      states:
+        - fi-inline
+        - fi-input-wrp-suffix-has-label
+      children:
+        - .fi-input-wrp-label
+        - .fi-icon
+        - .fi-input-wrp-actions
+
+dropdown:
+  .fi-dropdown:
+    .fi-dropdown-trigger:
+      - trigger button/link/icon
+    .fi-dropdown-panel:
+      states:
+        - fi-scrollable
+        - fi-width-{token}
+      children:
+        - .fi-dropdown-header
+        - .fi-dropdown-list
+  .fi-dropdown-list:
+    .fi-dropdown-list-item:
+      states:
+        - fi-color
+        - fi-disabled
+        - fi-selected
+      children:
+        - .fi-icon
+        - .fi-dropdown-list-item-image
+        - .fi-dropdown-list-item-label
+        - .fi-badge
+
+section:
+  .fi-section:
+    states:
+      - fi-section-not-contained
+      - fi-section-has-header
+      - fi-section-has-content-before
+      - fi-aside
+      - fi-compact
+      - fi-collapsible
+      - fi-collapsed
+      - fi-divided
+      - fi-secondary
+    .fi-section-header:
+      - .fi-icon
+      - .fi-section-header-text-ctn:
+          - .fi-section-header-heading
+          - .fi-section-header-description
+      - .fi-section-header-after-ctn
+      - .fi-section-collapse-btn
+    .fi-section-content-ctn:
+      - .fi-section-content
+      - .fi-section-footer
+
+modal:
+  .fi-modal:
+    states:
+      - fi-modal-open
+      - fi-modal-slide-over
+      - fi-modal-slide-over-from-start
+      - fi-modal-slide-over-from-end
+      - fi-modal-has-sticky-header
+      - fi-modal-has-sticky-footer
+      - fi-align-{start|center|end|left|right}
+      - fi-width-{token}
+    children:
+      - .fi-modal-close-overlay
+      - .fi-modal-window-ctn:
+          states:
+            - fi-clickable
+          children:
+            - .fi-modal-window:
+                states:
+                  - fi-modal-window-has-close-btn
+                  - fi-modal-window-has-content
+                  - fi-modal-window-has-footer
+                  - fi-modal-window-has-icon
+                  - fi-transition-enter-start
+                  - fi-transition-enter-end
+                  - fi-transition-leave-start
+                  - fi-transition-leave-end
+                children:
+                  - .fi-modal-header:
+                      - .fi-modal-close-btn
+                      - .fi-modal-icon-ctn
+                      - .fi-modal-icon-bg
+                      - .fi-modal-heading
+                      - .fi-modal-description
+                  - .fi-modal-content
+                  - .fi-modal-footer:
+                      - .fi-modal-footer-actions
+
+tabs:
+  .fi-tabs:
+    states:
+      - fi-contained
+      - fi-vertical
+    .fi-tabs-item:
+      states:
+        - fi-active
+      children:
+        - .fi-icon
+        - .fi-tabs-item-label
+        - .fi-badge
+        - .fi-tabs-item-badge-placeholder
+
+tables:
+  .fi-ta-ctn:
+    states:
+      - fi-ta-ctn-with-header
+      - fi-loading
+    children:
+      - .fi-ta-header-ctn:
+          - .fi-ta-header:
+              - .fi-ta-header-heading
+              - .fi-ta-header-description
+              - .fi-ta-actions
+      - .fi-ta-header-toolbar
+      - .fi-ta-filters-above-content-ctn
+      - .fi-ta-filter-indicators
+      - .fi-ta-selection-indicator
+      - .fi-ta-reorder-indicator
+      - .fi-ta-main:
+          - .fi-ta-content:
+              - table.fi-ta-table:
+                  - tr.fi-ta-row:
+                      states:
+                        - fi-clickable
+                        - fi-striped
+                        - fi-selected
+                        - fi-collapsed
+                        - fi-ta-group-header-row
+                      children:
+                        - td.fi-ta-cell
+                        - td.fi-ta-group-header-cell:
+                            - .fi-ta-group-header:
+                                - .fi-ta-group-heading
+                                - .fi-ta-group-description
+                  - th.fi-ta-header-cell
+      - .fi-pagination
+
+notifications:
+  .fi-no:
+    - toast stack
+  .fi-no-notification:
+    - .fi-no-notification-icon
+    - .fi-no-notification-main:
+        - .fi-no-notification-text:
+            - .fi-no-notification-title
+            - .fi-no-notification-date
+            - .fi-no-notification-body
+  .fi-no-database:
+    - .fi-no-notification-read-ctn
+    - .fi-no-notification-unread-ctn
